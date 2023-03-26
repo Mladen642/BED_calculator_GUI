@@ -1,9 +1,12 @@
 #Imports
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import QProcess
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIcon
 import constructed_gui
 from tkinter import messagebox as msgbox
 import os
+import sys
 
 #Directry change
 current_file_path = os.path.realpath(__file__)
@@ -27,6 +30,11 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.calc_3.clicked.connect(self.calculate_BED3)
         self.ui.BED_add.clicked.connect(self.calculate_combo_plus)
         self.ui.BED_sub.clicked.connect(self.calculate_combo_minus)
+
+        #Menu items      
+        self.ui.actionAbout.triggered.connect(self.menu_about)
+        self.ui.actionRestart.triggered.connect(self.restart)
+        self.ui.actionExit.triggered.connect(self.exit)
 
     #Functions
     def calculate_BED1(self):
@@ -104,25 +112,37 @@ class MyWindow(QtWidgets.QMainWindow):
 
             if self.ui.check_bed1.isChecked() and self.ui.check_bed2.isChecked() and self.ui.check_bed3.isChecked():
 
-                razlika = x1 - x2 - x3
+                razlika = round(x1 - x2 - x3,2)
                 self.ui.combinations_result_label.setText(f"{razlika}"+" Gy")
             
             elif self.ui.check_bed1.isChecked() and self.ui.check_bed2.isChecked():
-                razlika = x1 - x2
+                razlika = round(x1 - x2,2)
                 self.ui.combinations_result_label.setText(f"{razlika}"+" Gy")
 
             elif self.ui.check_bed1.isChecked() and self.ui.check_bed3.isChecked():
-                razlika = x1-x3
+                razlika = round(x1-x3,2)
                 self.ui.combinations_result_label.setText(f"{razlika}"+" Gy")
             
             elif self.ui.check_bed2.isChecked() and self.ui.check_bed3.isChecked():
-                razlika = x2-x3
+                razlika = round(x2-x3,2)
                 self.ui.combinations_result_label.setText(f"{razlika}"+" Gy")
             else:
                 msgbox.showwarning("Warning", "Please select which of the BEDs you would like to subtract.")
 
         except:
             msgbox.showerror("Error!", "Please calculate the values first, and then try to subtract them")
+
+    def menu_about(self):
+        msgbox.showinfo("About this app", "This app was developed to assist medical physics team in (re)calculating BED for patients in our clinic.\n\nDesigned and coded by MSc Mladen Babić")
+
+    def restart(self):
+        # restart function
+        QApplication.quit()
+        QProcess.startDetached(sys.executable, sys.argv)
+
+    def exit(self):
+        # exit function
+        QApplication.quit()
 
 
 if __name__ == "__main__":
