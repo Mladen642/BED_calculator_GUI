@@ -48,7 +48,7 @@ class MyWindow(QtWidgets.QMainWindow):
 
             return BED_1
         except:
-            QMessageBox.information(self, "Error!", "Please pick values first and then press calculate.")
+            QMessageBox.warning(self, "Error!", "Please pick values first and then press calculate.")
 
     def calculate_BED2(self):
         try:
