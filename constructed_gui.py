@@ -14,7 +14,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(615, 435)
+        MainWindow.resize(618, 455)
+        MainWindow.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
@@ -323,6 +324,8 @@ class Ui_MainWindow(object):
         self.menuBar.setStyleSheet("background-color: rgb(240, 240, 240);")
         self.menuBar.setObjectName("menuBar")
         self.menuFile = QtWidgets.QMenu(self.menuBar)
+        self.menuFile.setStyleSheet("selection-color: rgb(0, 0, 0);\n"
+"selection-background-color: rgb(220, 220, 220);")
         self.menuFile.setObjectName("menuFile")
         MainWindow.setMenuBar(self.menuBar)
         self.actionAbout = QtWidgets.QAction(MainWindow)
